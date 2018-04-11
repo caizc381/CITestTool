@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytijian.admin.dao.rbac.dao.EmployeeRoleMapper">
+
+	<resultMap id="employeeRoleMapResult"
+		type="com.mytijian.admin.dao.rbac.dataobject.EmployeeRoleDO">
+		<id column="id" property="id" />
+		<result column="employee_id" property="employeeId" />
+		<result column="role_id" property="roleId" />
+	</resultMap>
+
+	<sql id="baseColumns">
+		id,
+		employee_id,
+		role_id
+	</sql>
+	
+	<insert id="insertBatch">
+		insert into tb_employee_role
+		(
+		employee_id,
+		role_id
+		)
+		values
+		<foreach collection="roleIds" item="roleId" index="index"
+			separator=",">
+			(
+			#{employeeId},
+			#{roleId}
+			)
+		</foreach>
+	</insert>
+	
+	<delete id="deleteByEmployeeId">
+		delete from tb_employee_role where employee_id =
+		#{employeeId}
+	</delete>
+	
+	<select id="selectByEmployeeId" resultType="Integer" resultMap="employeeRoleMapResult">
+		select <include refid="baseColumns" /> from
+		tb_employee_role where employee_id = #{value}
+	</select>
+	
+	<!-- <select id="queryList" resultMap="employeeRoleMapResult">
+		select * from tb_employee_role_department
+		<where>
+			<if test="employeeId != null">
+				employee_id = #{employeeId}
+			</if>
+		</where>
+	</select>
+
+	<select id="queryRoleIdList" resultType="Integer">
+		select role_department_id from
+		tb_employee_role_department where employee_id = #{value}
+	</select>
+
+	<select id="selectEmployeeRoleDepartments" resultMap="employeeRoleMapResult">
+		SELECT
+		<include refid="baseColumns" />
+		FROM
+		tb_employee_role_department where employee_id = #{employeeId}
+	</select> -->
+</mapper>

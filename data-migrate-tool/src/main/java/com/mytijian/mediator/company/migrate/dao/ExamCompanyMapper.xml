@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytijian.mediator.company.migrate.dao.ExamCompanyMapper">
+	<resultMap id="ExamCompanyResultMap" type="com.mytijian.mediator.company.migrate.dao.dataobj.ExamCompanyDO">
+		<result column="id" property="id" jdbcType="INTEGER"/>
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="pinyin" property="pinyin" jdbcType="VARCHAR"/>
+		<result column="type" property="type" jdbcType="INTEGER"/>
+		<result column="prefix" property="prefix" jdbcType="VARCHAR"/>
+		<result column="description" property="description" jdbcType="VARCHAR"/>
+		<result column="reference_count_by_hosp" property="referenceCountByHosp" jdbcType="INTEGER"/>
+
+	</resultMap>
+	
+	<sql id="columnsWithOutId">
+		name,
+		pinyin,
+		type,
+		prefix,
+		description,
+		reference_count_by_hosp
+	</sql>
+	
+	<sql id="columnsIncludeId">
+		id,
+		<include refid="columnsWithOutId"/>
+	</sql>
+	
+	<select id="selectByLastPrimaryKeyId" resultMap="ExamCompanyResultMap">
+	    select <include refid="columnsIncludeId"/> 
+	    from 
+	    	tb_exam_company
+	    where
+	    	id >= #{lastPrimaryKeyId}
+	    limit #{limit}
+  </select>
+  
+  <select id="selectById" resultMap="ExamCompanyResultMap">
+	    select <include refid="columnsIncludeId"/> 
+	    from 
+	    	tb_exam_company
+	    where
+	    	id = #{id}
+  </select>
+</mapper>

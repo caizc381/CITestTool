@@ -2,62 +2,599 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>com.example</groupId>
-	<artifactId>CITestTool</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-
-	<name>CITestTool</name>
-	<description>Demo project for Spring Boot</description>
-
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.1.RELEASE</version>
+		<version>1.5.7.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	<groupId>com.mytijian.bops.admin</groupId>
+	<artifactId>admin</artifactId>
+	<version>1.27</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>admin-dao</module>
+		<module>admin-service</module>
+		<module>admin-biz</module>
+		<module>admin-site</module>
+		<module>admin-api</module>
+		<module>admin-client</module>
+	</modules>
+
+
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-	</properties>
+		<mytijian.feature.groupId>com.mytijian.feature</mytijian.feature.groupId>
+		<smart.version>1.8</smart.version>
+		<shop.version>1.7</shop.version>
+		<uic.version>1.4</uic.version>
+		<work.version>1.0</work.version>
+		<mytijian.version>2.132</mytijian.version>
+		<version.mongodb>3.2.0</version.mongodb>
+		<mediator.api.version>3.3.3</mediator.api.version>
+		<mediator.ops.version>1.0.0</mediator.ops.version>
+		<dubbo.examreport.api.version>4.14</dubbo.examreport.api.version>
+		<spring.boot.version>1.5.7.RELEASE</spring.boot.version>
+		<!--enforce replace spring version -->
+		<spring.version>4.3.11.RELEASE</spring.version>
+		<version.shiro>1.2.3</version.shiro>
+		<druid.version>1.1.5</druid.version>
+				<!-- Versions of MySQL and MyBatis -->
+		<version.mysql-connector>5.1.27</version.mysql-connector>
+		<!--<version.mybatis>3.4.0</version.mybatis>-->
+		<!--<version.mybatis-spring>1.3.1</version.mybatis-spring>-->
+		<version.commons-lang>2.6</version.commons-lang>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-cache</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+		<version.google.guava>18.0</version.google.guava>
+		<mybatis.starter.version>1.1.1</mybatis.starter.version>
+	  	<mytijian.trade.version>4.38</mytijian.trade.version>
+	  	<trade.origin.version>1.1.5</trade.origin.version>
+		<commons.dbcp.version>1.4</commons.dbcp.version>
+		<!-- dubbo -->
+		<dubbo.version>2.8.4-mytj.1</dubbo.version>
+		<zookeeper.version>3.4.8</zookeeper.version>
+		<javassist.version>3.18.2-GA</javassist.version>
+		<netty.version>3.7.0.Final</netty.version>
+		<zkClietn.version>0.9</zkClietn.version>
 
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+		<dbunit-plugin>1.1.1</dbunit-plugin>
+		<mybatis.plugin.version>1.1.1</mybatis.plugin.version>
+		<spring.test.dbunit.version>1.1.0</spring.test.dbunit.version>
+
+		<fastjson.version>1.2.22</fastjson.version>
+		<pinyin4j.version>2.5.0</pinyin4j.version>
+		<log4j.version>1.2.16</log4j.version>
+		<commons.fileupload.version>1.3</commons.fileupload.version>
+
+		<!-- gelf -->
+		<logstash-gelf.version>1.10.0</logstash-gelf.version>
+		<jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
+		<jackson-core-asl.version>1.9.13</jackson-core-asl.version>
+		<jackson-jr-all.version>2.5.0</jackson-jr-all.version>
+		<gotone.api.version>1.5</gotone.api.version>
+		<mediator.report.api.version>1.1.0</mediator.report.api.version>
+		<spring.data.commons.version>1.13.7.RELEASE</spring.data.commons.version>
+		<commons-logging.version>1.1.1</commons-logging.version>
+		<shiro-web.version>1.2.2</shiro-web.version>
+
+		<!--apollo-->
+		<apollo.version>0.9.0.mt</apollo.version>
+		<google.code.gson.version>2.8.0</google.code.gson.version>
+		<google.inject.version>4.1.0</google.inject.version>
+		<javax.inject.version>1</javax.inject.version>
+	  	<mytijian.offer.version>1.6</mytijian.offer.version>
+	  	<poi.version>3.10-FINAL</poi.version>
+
+  </properties>
+
+
+	<scm>
+		<connection>scm:git:http://git.mytijian.cn:888/sources/ops-admin.git</connection>
+		<url>scm:git:http://git.mytijian.cn:888/sources/ops-admin.git</url>
+		<developerConnection>scm:git:http://git.mytijian.cn:888/sources/ops-admin.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<!--项目jar -->
+			<dependency>
+				<groupId>com.mytijian.bops.admin</groupId>
+				<artifactId>admin-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.mytijian.bops.admin</groupId>
+				<artifactId>admin-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+			   <groupId>com.mytijian.bops.admin</groupId>
+			   <artifactId>admin-biz</artifactId>
+			   <version>${project.version}</version>
+			</dependency>
+			
+
+			<dependency>
+				<groupId>com.mytijian.bops.admin</groupId>
+				<artifactId>admin-dao</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<!-- 项目jar 结束 -->
+
+
+
+			<dependency>
+				<groupId>com.mytijian.mediator</groupId>
+				<artifactId>report-api</artifactId>
+				<version>${mediator.report.api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.mytijian.examreport.spi</groupId>
+				<artifactId>examreport-api</artifactId>
+				<version>${dubbo.examreport.api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.mytijian.gotone</groupId>
+				<artifactId>gotone-api</artifactId>
+				<version>${gotone.api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mytijian.origin</groupId>
+				<artifactId>base-api</artifactId>
+				<version>${trade.origin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mytijian.origin</groupId>
+				<artifactId>utilities</artifactId>
+				<version>${trade.origin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mytijian.trade</groupId>
+				<artifactId>settlement-api</artifactId>
+				<version>${mytijian.trade.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mytijian.trade</groupId>
+				<artifactId>common-api</artifactId>
+				<version>${mytijian.trade.version}</version>
+			</dependency>
+			<dependency>
+	  			<groupId>com.mytijian.trade</groupId>
+	  			<artifactId>monitor-api</artifactId>
+				<version>${mytijian.trade.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.mytijian.trade</groupId>
+				<artifactId>pay-api</artifactId>
+				<version>${mytijian.trade.version}</version>
+			</dependency>
+			<dependency>
+	  			<groupId>com.mytijian.feature</groupId>
+	  			<artifactId>common-api</artifactId>
+				<version>${mytijian.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mytijian.uic</groupId>
+				<artifactId>company-api</artifactId>
+				<version>${uic.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mytijian.work</groupId>
+				<artifactId>work-api</artifactId>
+				<version>${work.version}</version>
+			</dependency>
+
+
+			<dependency>
+				<groupId>com.mytijian.shared</groupId>
+				<artifactId>mediator-api</artifactId>
+				<version>${mediator.api.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>com.mytijian.feature</groupId>
+						<artifactId>company-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.mytijian.shared</groupId>
+				<artifactId>mediator-commons</artifactId>
+				<version>${mediator.api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mytijian.shop</groupId>
+				<artifactId>resource-api</artifactId>
+				<version>${shop.version}</version>
+			</dependency>
+
+			<dependency>
+	  			<groupId>com.mytijian.uic</groupId>
+	  			<artifactId>user-api</artifactId>
+	  			<version>${uic.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mytijian.common</groupId>
+				<artifactId>web-commons</artifactId>
+				<version>${mytijian.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-web</artifactId>
+				<version>${spring.boot.version}</version>
+			</dependency>
+
+			<dependency>
+	  			<groupId>com.mytijian.offer</groupId>
+	  			<artifactId>offer-api</artifactId>
+	  			<version>${mytijian.offer.version}</version>
+			</dependency>
+
+
+			<dependency>
+	  			<groupId>com.mytijian.smart</groupId>
+	  			<artifactId>survey-api</artifactId>
+	  			<version>${smart.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mytijian.feature</groupId>
+	            <artifactId>wx-api</artifactId>
+	            <version>${mytijian.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.statemachine</groupId>
+				<artifactId>spring-statemachine-core</artifactId>
+				<version>1.1.1.RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-commons</artifactId>
+				<version>${spring.data.commons.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-aop</artifactId>
+				<version>${spring.boot.version}</version>
+
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-mongodb</artifactId>
+				<version>${spring.boot.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>${mybatis.starter.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-log4j</artifactId>
+				<version>${spring-boot-starter-log4j}</version>
+			</dependency>
+
+			<!--<dependency>-->
+				<!--<groupId>com.aliyun.openservices</groupId>-->
+				<!--<artifactId>ons-client</artifactId>-->
+				<!--<version>1.2.2</version>-->
+			<!--</dependency>-->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>dubbo</artifactId>
+				<version>${dubbo.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.zookeeper</groupId>
+				<artifactId>zookeeper</artifactId>
+				<version>${zookeeper.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>${javassist.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.netty</groupId>
+				<artifactId>netty</artifactId>
+				<version>${netty.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.101tec</groupId>
+				<artifactId>zkclient</artifactId>
+				<version>${zkClietn.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mytijian.origin</groupId>
+				<artifactId>dbunit-plugin</artifactId>
+				<version>${dbunit-plugin}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mytijian.origin</groupId>
+				<artifactId>mybatis-plugin</artifactId>
+				<version>${mybatis.plugin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mytijian.trade</groupId>
+				<artifactId>order-api</artifactId>
+				<version>${mytijian.trade.version}</version>
+			</dependency>
+
+			<!-- apollo-->
+			<dependency>
+				<groupId>com.ctrip.framework.apollo</groupId>
+				<artifactId>apollo-client</artifactId>
+				<version>${apollo.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ctrip.framework.apollo</groupId>
+				<artifactId>apollo-core</artifactId>
+				<version>${apollo.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>${google.code.gson.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.inject</groupId>
+				<artifactId>guice</artifactId>
+				<version>${google.inject.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.inject</groupId>
+				<artifactId>javax.inject</artifactId>
+				<version>${javax.inject.version}</version>
+			</dependency>
+			<!-- -->
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-core</artifactId>
+				<version>${version.shiro}</version>
+			</dependency>
+			<dependency>
+            	<groupId>org.apache.shiro</groupId>
+            	<artifactId>shiro-spring</artifactId>
+            	<version>${version.shiro}</version>
+        	</dependency>
+
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-web</artifactId>
+				<version>${shiro-web.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid-spring-boot-starter</artifactId>
+				<version>${druid.version}</version>
+			</dependency>
+
+			<!--<dependency>-->
+				<!--<groupId>org.mybatis</groupId>-->
+				<!--<artifactId>mybatis-spring</artifactId>-->
+				<!--<version>${version.mybatis-spring}</version>-->
+			<!--</dependency>-->
+			<!--<dependency>-->
+				<!--<groupId>org.mybatis</groupId>-->
+				<!--<artifactId>mybatis</artifactId>-->
+				<!--<version>${version.mybatis}</version>-->
+			<!--</dependency>-->
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<scope>test</scope>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.springtestdbunit</groupId>
+				<artifactId>spring-test-dbunit</artifactId>
+				<scope>test</scope>
+				<version>${spring.test.dbunit.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>${version.commons-lang}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${version.google.guava}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.belerweb</groupId>
+				<artifactId>pinyin4j</artifactId>
+				<version>${pinyin4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>${commons-logging.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>${commons.fileupload.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>biz.paluch.logging</groupId>
+				<artifactId>logstash-gelf</artifactId>
+				<version>${logstash-gelf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.jr</groupId>
+				<artifactId>jackson-jr-all</artifactId>
+				<version>${jackson-jr-all.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>${jackson-mapper-asl.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-core-asl</artifactId>
+				<version>${jackson-core-asl.version}</version>
+			</dependency>
+			<dependency>
+	            <groupId>commons-dbcp</groupId>
+	            <artifactId>commons-dbcp</artifactId>
+	            <version>${commons.dbcp.version}</version>
+	        </dependency>
+
+  			<!-- poi -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>${poi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml</artifactId>
+				<version>${poi.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*Mapper.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+					<include>**/*.vm</include>
+					<include>**/*.xls</include>
+					<include>**/*.xlsx</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/test/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+					<include>**/*.vm</include>
+					<include>**/*.xls</include>
+					<include>**/*.xlsx</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>central</name>
+			<url>http://nexus.mytijian.cn:8081/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>public</id>
+			<name>public</name>
+			<url>http://nexus.mytijian.cn:8081/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>nexus</id>
+			<name>public</name>
+			<url>http://nexus.mytijian.cn:8081/nexus/content/repositories/releases</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+			<layout>default</layout>
+		</repository>
+	</repositories>
 
+	<!-- Plug-in Repositories setting -->
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus</id>
+			<name>nexus</name>
+			<url>http://nexus.mytijian.cn:8081/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 
+	<!-- This is for let maven knows the release or snapshot address for release
+		build -->
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>NexusRelease Repository</name>
+			<url>http://nexus.mytijian.cn:8081/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>nexus distribution snapshot repository</name>
+			<url>http://nexus.mytijian.cn:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>

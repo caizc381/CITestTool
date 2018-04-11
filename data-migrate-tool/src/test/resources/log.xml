@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<tb_company_migrate_log id="1"  min_pk_id="782" table_name="tb_exam_company" last_pk_id="781"/>
+	
+	<tb_hospital_exam_company_relation hospital_id="1"  company_id="555" his_name="tb_exam_company" />
+	<tb_hospital_exam_company_relation hospital_id="1"  company_id="555" his_name="tb_exam_company" />
+	
+	<tb_exam_company id="11" name="mtj" type="1" />
+	<tb_exam_company id="12" name="mtj" type="1" />
+	<tb_exam_company id="13" name="mtj" type="1" />
+	<tb_platform_company id="1" name="每日健康" pinyin="mrjk" init="hospital"/>  
+</dataset>																							

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytijian.mediator.company.migrate.dao.ManagerCompanyRelationMapper">
+  
+  <resultMap id="managerCompanyRelationResult" type="com.mytijian.mediator.company.migrate.dao.dataobj.ManagerCompanyRelationDO">
+	<result column="manager_id" property="managerId" />
+	<result column="company_id" property="companyId" />
+	<result column="hospital_id" property="hospitalId" />
+	<result column="create_manager_id" property="createManagerId" />
+	<result column="as_account_company" property="asAccountCompany" />
+	<result column="status" property="status" />
+	<result column="contact_name" property="contactName" />
+	<result column="contact_tel" property="contactTel" />
+	<result column="new_company_id" property="newCompanyId" />
+ </resultMap>
+ 
+ <resultMap  id="managerCompanyMidResult" type="com.mytijian.mediator.company.migrate.dao.dataobj.ManagerCompanyMidDO">
+ 	<result column="manager_id" property="managerId" />
+	<result column="tb_exam_company_id" property="examCompanyId" />
+	<result column="platform_company_id" property="platformCompanyId" />
+	<result column="company_name" property="companyName" />
+ </resultMap>
+ 
+  <sql id="columns">
+	manager_id,
+	company_id,
+	hospital_id,
+	create_manager_id,
+	as_account_company,
+	status,
+	contact_name,
+	contact_tel,
+	new_company_id
+  </sql>
+  
+  <select id="selectAll" resultMap="managerCompanyRelationResult">
+    select <include refid="columns" />
+    from tb_manager_company_relation
+  </select>
+  
+  <select id="selectNewCompanyIdIsNull" resultMap="managerCompanyRelationResult">
+  	select <include refid="columns" />
+    from tb_manager_company_relation
+    where new_company_id is null
+  </select>
+  
+  <select id="selectNewCompanyIdIsNotNull" resultMap="managerCompanyRelationResult">
+  	select <include refid="columns" />
+    from tb_manager_company_relation
+    where new_company_id is not null
+  </select>
+  
+  <update id="update">
+  	update tb_manager_company_relation
+  	set new_company_id = #{newCompanyId}
+  	where
+  	manager_id = #{managerId} and 
+  	company_id = #{companyId} 
+  	<if test="hospitalId != null">
+  	 and hospital_id = #{hospitalId}
+  	</if>
+  </update>
+  
+  <select id="selectByOrganizationId" resultType="Integer">
+    SELECT distinct mcr.manager_id as manager_id  
+    FROM tb_manager_company_relation mcr 
+     LEFT JOIN tb_account_role ar on  mcr.manager_id = ar.account_id
+     LEFT JOIN tb_role r on ar.role_id = r.id
+    WHERE r.id IN (5,7) and mcr.hospital_id = #{organizationId}
+  </select>
+  
+  <insert id="insertGuestCompany" parameterType="com.mytijian.mediator.company.migrate.dao.dataobj.ManagerCompanyRelationDO">
+  	insert into tb_manager_company_relation (<include refid="columns"/>)
+		values(
+				#{managerId},
+				#{companyId},
+				#{hospitalId},
+				#{createManagerId},
+				#{asAccountCompany},
+				#{status},
+				#{contactName},
+				#{contactTel},
+				#{newCompanyId})
+  </insert>
+  
+  <select id="selectPlatformMamager" resultType="Integer">
+  	SELECT  DISTINCT mcrel.manager_id FROM tb_manager_company_relation mcrel
+    LEFT JOIN tb_account_role acrol on mcrel.manager_id = acrol.account_id
+    where acrol.role_id = 4
+  </select>
+  
+  <update id="deleteByManagerIdNewCompanyIdAndHospitalId">
+  	 update tb_manager_company_relation
+  	 set status = 0
+  	 where hospital_id = #{organizationId} and manager_id = #{managerId} 
+  	 and new_company_id = #{newCompanyId}
+  </update>
+  
+  <select id="selectByManagerId" resultMap="managerCompanyRelationResult">
+     SELECT <include refid="columns" />
+     FROM tb_manager_company_relation 
+     WHERE manager_id = #{managerId}
+  </select>
+  
+</mapper>

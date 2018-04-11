@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.mytijian.bops.admin</groupId>
+		<artifactId>admin</artifactId>
+		<version>1.27</version>
+	</parent>
+	<artifactId>admin-biz</artifactId>
+	<name>admin-biz</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<hibernate-validator.version>5.3.6.Final</hibernate-validator.version>
+	</properties>
+	<dependencies>
+		<!-- shop module -->
+		<dependency>
+			<groupId>com.mytijian.shop</groupId>
+			<artifactId>resource-api</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>mybatis</artifactId>
+					<groupId>org.mybatis</groupId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.validation</groupId>
+					<artifactId>validation-api</artifactId>
+				</exclusion>
+				<!--<exclusion>-->
+					<!--<groupId>com.dangdang</groupId>-->
+					<!--<artifactId>sharding-jdbc-core</artifactId>-->
+				<!--</exclusion>-->
+			</exclusions>
+		</dependency>
+		<!-- origin module -->
+		<dependency>
+			<groupId>com.mytijian.origin</groupId>
+			<artifactId>base-api</artifactId>
+		</dependency>
+		<!-- poi -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+		</dependency>
+		<!-- spring boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.mytijian.uic</groupId>
+			<artifactId>user-api</artifactId>
+		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.hibernate</groupId>-->
+			<!--<artifactId>hibernate-validator</artifactId>-->
+			<!--<version>${hibernate-validator.version}</version>-->
+		<!--</dependency>-->
+	</dependencies>
+</project>

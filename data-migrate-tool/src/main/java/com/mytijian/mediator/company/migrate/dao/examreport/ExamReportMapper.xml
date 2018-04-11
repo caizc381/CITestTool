@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytijian.mediator.company.migrate.dao.examreport.ExamReportMapper">
+	
+	<select id="selectWithOrderNumByPage" 
+		resultType="com.mytijian.mediator.company.migrate.dao.dataobj.examreport.ConditionDO">
+		select  id,
+				hospital_id as hospitalId,
+				company_id as companyId,
+				order_num as orderNum
+		from
+			${tableName}
+		where
+			order_num is not null
+			and company_id != ''
+			and id <![CDATA[ > ]]> #{startIndex}
+		order by id
+	</select>
+	
+	<select id="selectGroupDataWithCompanyIdByPage" 
+	resultType="com.mytijian.mediator.company.migrate.dao.dataobj.examreport.ConditionDO">
+		select  id,
+				hospital_id as hospitalId,
+				company_id as companyId,
+				report_id as reportId
+		from
+			${tableName}
+		where
+			company_id is not null
+			and company_id != ''
+			and id <![CDATA[ > ]]> #{startIndex}
+		order by id
+	</select>
+	
+	<select id="selectGroupSummaryWithCompanyIdByPage" 
+	resultType="com.mytijian.mediator.company.migrate.dao.dataobj.examreport.ConditionDO">
+		select  id,
+				hospital_id as hospitalId,
+				company_id as companyId
+		from tb_group_report_summary_base
+		where
+			id <![CDATA[ > ]]> #{startIndex}
+		order by id
+	</select>
+	
+	<select id="selectOrderNumByReportId" resultType="String">
+		select order_num 
+		from
+			${tableName}
+		where id = #{reportId}
+	</select>
+	
+	<update id="updateNewCompanyIdById">
+		update ${tableName}
+		set
+			new_company_id = #{newCompanyId}
+			<if test="oldCompanyId != null">
+			, company_id = #{oldCompanyId}
+			</if>
+		where 
+			id = #{reportId}
+	</update>
+	
+</mapper>

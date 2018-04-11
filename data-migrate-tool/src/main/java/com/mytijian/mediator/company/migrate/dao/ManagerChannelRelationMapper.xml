@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytijian.mediator.company.migrate.dao.ManagerChannelRelationMapper">
+  
+  <resultMap id="managerChannelRelResult" type="com.mytijian.mediator.company.migrate.dao.dataobj.ManagerChannelRelationDO">
+	<result column="id" property="id" />
+	<result column="manager_id" property="managerId" />
+	<result column="channel_id" property="channelId" />
+	<result column="gmt_created" property="gmtCreated" />
+	<result column="gmt_modified" property="gmtModified" />
+
+ </resultMap>
+ 
+  <sql id="colums">
+   id,manager_id,channel_id,gmt_created,gmt_modified 
+  </sql>
+ 
+  
+  <select id="selectByManagerId" resultMap="managerChannelRelResult">
+    select <include refid="colums" />
+     from tb_manager_channel_relation 
+     where manager_id = #{managerId}
+  </select>
+  
+  <select id="selectByManagerIds" resultMap="managerChannelRelResult">
+    select <include refid="colums" />
+     from tb_manager_channel_relation 
+     where manager_id in
+     <foreach collection="managerIds" item="managerId" open="(" separator="," close=")">
+				#{managerId}
+	 </foreach>
+  </select>	
+
+</mapper>

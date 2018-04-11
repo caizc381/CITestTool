@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+  http://www.springframework.org/schema/context
+  http://www.springframework.org/schema/context/spring-context-3.2.xsd
+  http://www.springframework.org/schema/util
+  http://www.springframework.org/schema/util/spring-util-3.2.xsd
+  http://www.springframework.org/schema/data/mongo
+  http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+  	
+	  	 
+	<util:properties id ="mongodb" location="classpath*:mongodb.properties" />
+  	<context:component-scan base-package="com.mytijian.mongodb"/>
+  	
+  	<!-- For change profile in runtime, there are 2 ways. 1st, export spring_profiles_default=xxx; 
+  		2nd, add -Dspring.profiles.active=xxx while start web app from maven -->
+	<beans profile="default">
+		<mongo:mongo-client id="mongo"  replica-set="#{mongodb['replset']}" credentials="#{mongodb['dbuserpwd']}">
+	        <mongo:client-options write-concern="SAFE"
+	             connections-per-host="#{mongodb['connectionsPerHost']}"
+	             threads-allowed-to-block-for-connection-multiplier ="#{mongodb['threadsAllowedToBlockForConnectionMultiplier']}"
+	             connect-timeout="#{mongodb['connectTimeout']}"
+	             max-wait-time= "#{mongodb['maxWaitTime']}"
+	             socket-keep-alive="#{mongodb['socketKeepAlive']}"
+	             socket-timeout= "#{mongodb['socketTimeout']}" />
+	    </mongo:mongo-client>
+	    
+	    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+	        <constructor-arg ref="mongo"/>
+	        <constructor-arg name="databaseName" value="#{mongodb['db']}"/>
+	        <property name="writeConcern" value="FSYNC_SAFE"/>
+	    </bean>
+	</beans>
+	
+	<beans profile="dev">
+		<mongo:mongo-client id="mongo"  host="#{mongodb['host']}" port="#{mongodb['port']}" >
+	        <mongo:client-options write-concern="SAFE"
+	             connections-per-host="#{mongodb['connectionsPerHost']}"
+	             threads-allowed-to-block-for-connection-multiplier ="#{mongodb['threadsAllowedToBlockForConnectionMultiplier']}"
+	             connect-timeout="#{mongodb['connectTimeout']}"
+	             max-wait-time= "#{mongodb['maxWaitTime']}"
+	             socket-keep-alive="#{mongodb['socketKeepAlive']}"
+	             socket-timeout= "#{mongodb['socketTimeout']}" />
+	    </mongo:mongo-client>
+	    
+	    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+	        <constructor-arg ref="mongo"/>
+	        <constructor-arg name="databaseName" value="#{mongodb['db']}"/>
+	        <property name="writeConcern" value="FSYNC_SAFE"/>
+	    </bean>
+	</beans>
+</beans>

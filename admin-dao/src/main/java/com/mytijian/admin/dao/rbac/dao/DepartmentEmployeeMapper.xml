@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.mytijian.admin.dao.rbac.dao.DepartmentEmployeeMapper">
+
+	<resultMap id="departmentEmployeeMapResult"
+		type="com.mytijian.admin.dao.rbac.dataobject.DepartmentEmployeeDO">
+		<id column="id" property="id" />
+		<result column="department_id" property="departmentId" />
+		<result column="employee_id" property="employeeId" />
+	</resultMap>
+
+	<sql id="baseColumns">
+		id,
+		department_id,
+		employee_id
+	</sql>
+
+	<select id="getDepartmentEmployeeByEmpoyeeId" resultMap="departmentEmployeeMapResult">
+		select
+		<include refid="baseColumns" />
+		from tb_department_employee where employee_id = #{employeeId}
+	</select>
+
+	<insert id="insert"
+		parameterType="com.mytijian.admin.dao.rbac.dataobject.DepartmentEmployeeDO"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into tb_department_employee
+		(
+		department_id,
+		employee_id
+		)
+		values
+		(
+		#{departmentId},
+		#{employeeId}
+		)
+	</insert>
+
+	<update id="updateDepartmentIdByEmpoyeeId"
+		parameterType="com.mytijian.admin.dao.rbac.dataobject.DepartmentEmployeeDO">
+		update tb_department_employee set department_id =
+		#{departmentId}
+		where employee_id = #{employeeId}
+	</update>
+
+	<!-- <update id="updateDepartmentIdByEmpoyeeId">
+		update tb_department_employee set department_id = #{departmentId}
+			where employee_id = #{employeeId}
+	</update> -->
+
+	<delete id="deleteBatchBydepartmentIds">
+		delete from tb_department_employee where department_id in
+		<foreach collection="list" index="index" item="departmentId"
+			open="(" separator="," close=")">
+			#{departmentId}
+		</foreach>
+	</delete>
+
+</mapper>

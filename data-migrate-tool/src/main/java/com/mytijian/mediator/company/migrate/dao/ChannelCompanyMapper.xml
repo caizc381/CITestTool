@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytijian.mediator.company.migrate.dao.ChannelCompanyMapper">
+
+	<resultMap id="channelCompanyResult" type="com.mytijian.mediator.company.migrate.dao.dataobj.ChannelCompanyDO">
+		<id column="id" property="id" />
+		<result column="gmt_created" property="gmtCreated" />
+		<result column="gmt_modified" property="gmtModified" />
+		<result column="name" property="name"/>
+		<result column="platform_company_id" property="platformCompanyId"/>
+		<result column="organization_id" property="organizationId"/>
+		<result column="organization_name" property="organizationName"/>
+		<result column="discount" property="discount"/>
+		<result column="settlement_mode" property="settlementMode"/>
+		<result column="send_exam_sms" property="sendExamSms"/>
+		<result column="send_exam_sms_days" property="sendExamSmsDays"/>
+		<result column="pinyin" property="pinyin"/>
+		<result column="is_deleted" property="deleted"/>
+		<result column="tb_exam_company_id" property="tbExamCompanyId"/>
+		<result column="description" property="description"/>
+	</resultMap>
+
+	<sql id="columns">
+		gmt_created,
+		gmt_modified,
+		name,
+		platform_company_id,
+		organization_id,
+		organization_name,
+		discount,
+		settlement_mode,
+		send_exam_sms,
+		send_exam_sms_days,
+		pinyin,
+		is_deleted,
+		description,
+		tb_exam_company_id
+	</sql>
+	
+	<insert id="insert" parameterType="com.mytijian.mediator.company.migrate.dao.dataobj.ChannelCompanyDO" keyProperty="id" useGeneratedKeys="true">
+		insert into tb_channel_company (<include refid="columns"/>)
+		values(
+			now(),
+			now(),
+			#{name},
+			#{platformCompanyId},
+			#{organizationId},
+			#{organizationName},
+			#{discount},
+			#{settlementMode},
+			#{sendExamSms},
+			#{sendExamSmsDays},
+			#{pinyin},
+			#{deleted},
+			#{description},
+			#{tbExamCompanyId}
+		)
+	</insert>
+	
+	<insert id="insertList" parameterType="com.mytijian.mediator.company.migrate.dao.dataobj.ChannelCompanyDO">
+		insert into tb_channel_company (<include refid="columns"/>)
+		values
+			<foreach collection="list" item="item" separator=",">
+				(now(),
+				now(),
+				#{item.name},
+				#{item.platformCompanyId},
+				#{item.organizationId},
+				#{item.organizationName},
+				#{item.discount},
+				#{item.settlementMode},
+				#{item.sendExamSms},
+				#{item.sendExamSmsDays},
+				#{item.pinyin},
+				#{item.deleted},
+				#{item.description},
+				#{item.tbExamCompanyId})
+			</foreach>
+	</insert>
+	
+	<select id="selectByExamCompanyId" resultMap="channelCompanyResult">
+	  select id,<include refid="columns" />
+	  from tb_channel_company
+	  where tb_exam_company_id = #{examCompanyId}
+	</select>
+
+	<select id="selectByPlatformCompanyIdAndOrganizationId" resultMap="channelCompanyResult">
+	  select id,<include refid="columns" />
+	  from tb_channel_company
+	  where platform_company_id = #{platformCompanyId}
+		AND organization_id = #{organizationId}
+	</select>
+
+	<update id="updateChannelCompany" parameterType="com.mytijian.mediator.company.migrate.dao.dataobj.ChannelCompanyDO">
+		update tb_channel_company set 
+		name = #{name},
+		gmt_modified = now(),
+		platform_company_id = #{platformCompanyId},
+		organization_id = #{organizationId},
+		discount = #{discount},
+		settlement_mode = #{settlementMode},
+		send_exam_sms = #{sendExamSms},
+		send_exam_sms_days = #{sendExamSmsDays},
+		is_deleted = #{deleted},
+		pinyin = #{pinyin},
+		tb_exam_company_id = #{tbExamCompanyId},
+		organization_name = #{organizationName},
+		description = #{description}
+		where id = #{id}
+	</update>
+
+	<select id="selectByExamCompanyIdAndOrganizationId" resultMap="channelCompanyResult">
+		select id,<include refid="columns"/>
+		from
+		tb_channel_company
+		where
+		tb_exam_company_id = #{tbExamCompanyId}
+		and
+		organization_id = #{organizationId}
+	</select>
+	
+	<select id="selectByPlatformCompanyId2" resultMap="channelCompanyResult">
+	  select id,<include refid="columns" />
+	  from tb_channel_company
+	  where platform_company_id = #{platformCompanyId}
+	</select>
+	
+	<select id="selectChannelGusetCompany" resultMap ="channelCompanyResult">
+		select id,<include refid="columns"/>
+		from tb_channel_company
+		where organization_id = #{organizationId}
+		and tb_exam_company_id  <![CDATA[<]]> 0 
+	</select>
+	
+	
+	<select id="selectById" resultMap="channelCompanyResult">
+	   select id,<include refid="columns"/>
+	   from tb_channel_company
+	   where id = #{newCompanyId}
+	</select>
+	
+	<select id="selectByOrganizationIdAndExamCompanyId" resultMap="channelCompanyResult">
+	    select id,<include refid="columns"/>
+	   from tb_channel_company
+	   where tb_exam_company_id = #{examCompanyId} and organization_id = #{organizationId}
+	</select>
+</mapper>

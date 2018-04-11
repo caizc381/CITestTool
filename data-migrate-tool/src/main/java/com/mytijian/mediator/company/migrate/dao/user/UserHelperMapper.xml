@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytijian.mediator.company.migrate.dao.user.UserHelperMapper">
+    <resultMap id="AccountResultMap" type="com.mytijian.account.model.Account">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="mobile" property="mobile" />
+        <result column="idcard" property="idCard" />
+        <result column="status" property="status" />
+        <result column="type" property="type" />
+        <result column="id_type" property="idType" />
+        <result column="employee_id" property="employeeId" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="system" property="system"/>
+    </resultMap>
+    <select id="selectHospitalIdByManagerId" resultType="int">
+        SELECT
+          ac.hospital_Id
+        FROM
+          tb_manager_account_company_relation tmacr
+        LEFT JOIN tb_account_company ac
+          ON ac.id = tmacr.account_company_id
+        WHERE
+          tmacr.manager_id = #{managerId}
+    </select>
+
+    <select id="selectHospitalIdmt" resultType="int">
+        SELECT h.id FROM tb_hospital h LEFT JOIN tb_site s ON h.`id` = s.`hospital_id` WHERE s.`url` = 'mt' AND h.`organization_type` = 2;
+    </select>
+
+    <select id="getAccountById" resultMap="AccountResultMap">
+        select
+        id,
+		name,
+		mobile,
+		idcard,
+		status,
+		type,
+		employee_id,
+		create_time,
+		update_time,
+		id_type,
+		system
+        from tb_account where id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytijian.admin.dao.address.dao.AreaMapper">
+
+	<resultMap id="areaMapResult"
+		type="com.mytijian.admin.dao.address.dataobject.AreaDO">
+		<id column="id" property="id" />
+		<result column="area_name" property="areaName" />
+	</resultMap>
+
+	<sql id="baseColumns">
+		id,
+		area_name
+	</sql>
+
+	<insert id="insert"
+		parameterType="com.mytijian.admin.dao.address.dataobject.AreaDO"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into tb_area (area_name)
+		values (#{areaName})
+	</insert>
+	
+	<update id="update"
+		parameterType="com.mytijian.admin.dao.address.dataobject.AreaDO">
+		update tb_area set area_name = #{areaName}
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteById">
+		delete
+		from tb_area where id = #{id}
+	</delete>
+	
+	
+	<select id="selectById" resultMap="areaMapResult">
+		select <include refid="baseColumns" /> from tb_area
+		 where id = #{id}
+	</select>
+	
+	<select id="selectAll" resultMap="areaMapResult">
+		select <include refid="baseColumns" /> from tb_area
+	</select>
+
+</mapper>

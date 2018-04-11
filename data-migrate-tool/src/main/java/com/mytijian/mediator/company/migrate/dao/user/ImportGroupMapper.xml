@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytijian.mediator.company.migrate.dao.user.ImportGroupMapper">
+
+	<resultMap id="FunctionResultMap" type="com.mytijian.mediator.company.migrate.dao.dataobj.user.ImportGroupId">
+		<result column="id" property="id"/>
+		<result column="manager_id" property="managerId" />
+		<result column="company_id" property="companyId" />
+		<result column="new_company_id" property="newCompanyId" />
+		<result column="organization_type" property="organizationType" />
+		<result column="group_seq" property="groupId"/>
+	</resultMap>
+
+	<sql id="relationColumns">
+		seq.id,
+		seq.manager_id,
+		seq.company_id,
+		seq.new_company_id,
+		seq.group_seq,
+		seq.organization_type
+	</sql>
+
+	<select id="selectimportGroupSeqsExamCompanyIdIsNull" resultMap="FunctionResultMap">
+		SELECT <include refid="relationColumns" />
+		FROM tb_import_group_seq seq
+		WHERE
+		(seq.new_company_id IS NULL
+		OR
+		seq.organization_type IS NULL)
+		AND
+		seq.id >= #{nowId}
+		limit #{limit}
+	</select>
+
+	<update id="updateImportGroupSeq">
+		UPDATE tb_import_group_seq
+		SET
+		<if test="newCompanyId != null">
+            new_company_id = #{newCompanyId}
+		</if>
+		<if test="organizationType != null">
+			, organization_type = #{organizationType}
+		</if>
+		WHERE
+		manager_id = #{managerId}
+		AND
+		company_id = #{companyId}
+	</update>
+</mapper>

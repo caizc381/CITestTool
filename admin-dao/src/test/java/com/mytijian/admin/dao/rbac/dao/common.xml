@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <tb_employee id="1" gmt_created="2017-03-01 10:26:43" gmt_modified="2017-03-01 10:26:45" login_name="feng" employee_no="20160112" employee_name="测试" nick_name="11" password="917c344b8eb4c2228ef097ce6387dc50" status="1" mobile="111" salt="1"/>
+  <tb_department_employee id="10" department_id="46" employee_id="1"/>
+  
+</dataset>

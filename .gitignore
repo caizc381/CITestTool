@@ -1,25 +1,24 @@
-/target/
-!.mvn/wrapper/maven-wrapper.jar
+*.class
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
+# Package Files #
+*.jar
+*.war
+*.ear
 *.iml
-*.ipr
+*.idea
+*.classpath
+*.project
+*.settings
 
-### NetBeans ###
-/nbproject/private/
-/build/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+ops-admin/target/
+ops-admin/ops-manager-api/target/
+ops-admin/ops-manager-dao/target/
+ops-admin/ops-manager-service/target/
+ops-admin/ops-manager-site/target/
+target/
+.DS_Store

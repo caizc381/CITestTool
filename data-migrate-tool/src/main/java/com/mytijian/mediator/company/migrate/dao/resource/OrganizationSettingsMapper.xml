@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytijian.mediator.company.migrate.dao.resource.OrganizationSettingsMapper">
+
+	<resultMap id="HospitalSettingsResultMap" type="com.mytijian.resource.model.HospitalSettings">
+		<id column="hospital_id" property="hospitalId" />
+		<result column="show_item_price" property="showItemPrice" />
+		<result column="enable_date_period" property="enableDatePeriod" />
+		<result column="calculator_service" property="calculatorService" />
+		<result column="delivery_price" property="deliveryPrice" />
+		<result column="basic_meal_id" property="basicMealId" />
+		<result column="show_exam_report" property="showExamReport" />
+		<result column="show_invoice" property="showInvoice" />
+		<result column="make_out_invoice" property="makeOutInvoice" />
+		<result column="invoice_required" property="invoiceRequired" />
+		<result column="previous_book_days" property="previousBookDays" />
+		<result column="previous_book_time" property="previousBookTime" />
+		<result column="previous_export_days" property="previousExportDays" />
+		<result column="vip_price" property="vipPrice" />
+		<result column="auto_release_days" property="autoReleaseDays" />
+		<result column="service_tel" property="serviceTel" />
+		<result column="technical_tel" property="technicalTel" />
+		<result column="exam_start_time" property="examStartTime" />
+		<result column="exam_end_time" property="examEndTime" />
+		<result column="prompt_page_url" property="promptPageUrl" />
+		<result column="book_prompt_text" property="bookPromptText" />
+		<result column="auto_confirm_order" property="autoConfirmOrder" />
+		<result column="auto_export_order" property="autoExportOrder" />
+		<result column="cooperate_company" property="cooperateCompany" />
+		<result column="cooperate_type" property="cooperateType" />
+		<result column="only_locale_pay" property="onlyLocalePay" />
+		<result column="send_exam_sms" property="sendExamSms" />
+		<result column="send_exam_sms_days" property="sendExamSmsDays" />
+		<result column="send_exam_sms_time" property="sendExamSmsTime" />
+		<result column="refund_refused_item" property="refundRefusedItem" />
+		<result column="support_ext_discount" property="supportExtDiscount" />
+		<result column="guest_online_comp_alias" property="guestOnlineCompAlias" />
+		<result column="guest_offline_comp_alias" property="guestOfflineCompAlias" />
+		<result column="allow_adjust_price" property="allowAdjustPrice" />
+		<result column="is_send_message" property="isSendMessage" />
+		<result column="settlement_mode" property="settlementMode" />
+		<result column="reserve_day_available" property="reserveDayAvailable" />
+		<result column="m_guest_comp_alias" property="mGuestCompAlias" />
+		<result column="manual_export_order" property="manualExportOrder" />
+		<result column="export_with_xls" property="exportWithXls" />
+		<result column="account_pay" property="accountPay" />
+		<result column="ali_pay" property="aliPay" />
+		<result column="weixin_pay" property="weiXinPay" />
+		<result column="accept_offline_pay" property="acceptOfflinePay" />
+		<result column="mobileFieldOrder" property="mobileFieldOrder" />
+		<result column="need_local_pay" property="needLocalPay" />
+		<result column="show_company_report" property="showCompanyReport" />
+		<result column="examreport_interval_time" property="examreportIntervalTime" />
+		<result column="group_exam_tel" property="groupExamTel" />
+		<result column="open_group_examreport" property="openGroupExamReport" />
+		<result column="second_site_switch" property="secondSiteSwitch" />
+		<result column="is_auto_export_order_to_emails" property="isAutoExportOrderToEmails" />
+		<result column="auto_export_order_emails" property="autoExportOrderEmails" />
+		<result column="open_sync_company" property="openSyncCompany" />
+		<result column="open_sync_meal" property="openSyncMeal" />
+		<result column="is_advance_export_company_order" property="isAdvanceExportCompanyOrder" />
+		<result column="provide_individuation_meal" property="provideIndividuationMeal" />
+		<result column="open_print_exam_guide" property="openPrintExamGuide" />
+		<result column="open_queue" property="openQueue" />
+		<result column="is_smart_recommend" property="isSmartRecommend" jdbcType="INTEGER"/>
+		<result column="pay_tip_text" property="payTipText"/>
+		<result column="export_with_no_exam_date" property="exportWithNoExamDate"/>
+	</resultMap>	
+
+	<resultMap id="channelSettingReulstMap" type="com.mytijian.resource.model.ChannelSettings">
+		<result column="hospital_id" property="hospitalId" />
+		<result column="delivery_price" property="deliveryPrice" />
+		<result column="service_tel" property="serviceTel" />
+		<result column="technical_tel" property="technicalTel" />
+		<result column="allow_adjust_price" property="allowAdjustPrice" />
+		<result column="second_site_switch" property="secondSiteSwitch" />
+		<result column="group_exam_tel" property="groupExamTel" />
+		<result column="account_pay" property="accountPay" />
+		<result column="ali_pay" property="aliPay" />
+		<result column="weixin_pay" property="weiXinPay" />
+		<result column="accept_offline_pay" property="acceptOfflinePay" />
+	</resultMap>
+	
+	<sql id="hospital_settings_select">
+		hospital_id,
+		show_item_price,
+		enable_date_period,
+		calculator_service,
+		delivery_price,
+		basic_meal_id,
+		show_exam_report,
+		show_invoice,
+		make_out_invoice,
+		invoice_required,
+		previous_book_days,
+		previous_book_time,
+		previous_export_days,
+		vip_price,
+		auto_release_days,
+		service_tel,
+		technical_tel,
+		exam_start_time,
+		exam_end_time,
+		prompt_page_url,
+		book_prompt_text,
+		auto_confirm_order,
+		auto_export_order,
+		cooperate_company,
+		cooperate_type,
+		only_locale_pay,
+		send_exam_sms,
+		send_exam_sms_days,
+		send_exam_sms_time,
+		case when refund_refused_item is null then 1 else
+		refund_refused_item end refund_refused_item,
+		support_ext_discount,
+		guest_online_comp_alias,
+		guest_offline_comp_alias,
+		allow_adjust_price,
+		is_send_message,
+		settlement_mode,
+		reserve_day_available,
+		m_guest_comp_alias,
+		manual_export_order,
+		export_with_xls,
+		account_pay,
+		ali_pay,
+		weixin_pay,
+		accept_offline_pay,
+		mobileFieldOrder,
+		need_local_pay,
+		show_company_report,
+		examreport_interval_time,
+		second_site_switch,
+		group_exam_tel,
+		open_group_examreport,
+		second_site_switch,
+		is_auto_export_order_to_emails,
+		auto_export_order_emails,
+		open_sync_company,
+		open_sync_meal,
+		is_advance_export_company_order,
+		provide_individuation_meal,
+		open_print_exam_guide,
+		open_queue,
+		is_smart_recommend,
+		pay_tip_text,
+		export_with_no_exam_date
+	</sql>
+
+	<select id="getHospitalSettingByHospitalId" resultMap="HospitalSettingsResultMap">
+		SELECT
+		<include refid="hospital_settings_select" />
+		FROM
+			tb_hospital_settings
+		WHERE
+			hospital_id=#{hospitalId}
+	</select>
+
+</mapper>

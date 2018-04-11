@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mytijian.mediator.company.migrate.correct.dao.CrmHisCompanyMapper">
+
+	<select id="selectGuestCompany" 
+		resultType="com.mytijian.mediator.company.migrate.correct.dao.dataobj.CrmHisCompanyDO">
+		select  id as id,
+				hospital_id as hospitalId,
+				crm_company_id as tbExamCompanyId,
+				crm_company_name  as companyName 
+		from 
+			`tb_crm_his_company_relation` 
+		where 
+			`crm_company_id` = 1585 
+		and 
+			crm_company_name != '散客单位'
+		and
+			new_company_id is null
+	</select>
+	
+	<update id="updateNewCompanyIdFor1585">
+		update 
+			tb_crm_his_company_relation
+		set 
+			new_company_id = #{newCompanyId}
+		where
+			id = #{id}
+	</update>
+	
+	<update id="updateNewCompanyId">
+		update 
+			tb_crm_his_company_relation rel
+		set 
+			rel.new_company_id = (select id from `tb_hospital_company` hp 
+								  where hp.`organization_id` = rel.`hospital_id` 
+								 and hp.`tb_exam_company_id` = rel.`crm_company_id`)
+		where 
+			rel.`new_company_id` is null
+	</update>
+	
+</mapper>
