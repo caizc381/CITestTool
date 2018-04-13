@@ -1,1 +1,0 @@
-alter table tb_manager_company_relation add column new_company_id int(11) comment '新单位id';

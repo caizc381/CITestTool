@@ -1,2 +1,0 @@
-INSERT INTO `tb_order_migrate_log` (`id`, `table_name`, `min_pk_id`, `last_pk_id`, `gmt_created`, `gmt_modified`, `limit_size`, `init_done`, `migrate_done`)
-VALUES	(1, 'tb_order', 0, 0, NOW(), NOW(), 100, 'todo', 'todo');

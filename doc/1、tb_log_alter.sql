@@ -1,1 +1,0 @@
-ALTER TABLE tb_log modify parameters text default null;

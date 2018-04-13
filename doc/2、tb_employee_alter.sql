@@ -1,1 +1,0 @@
-alter table tb_employee add pinyin varchar(256) DEFAULT NULL COMMENT '拼音简写';
