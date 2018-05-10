@@ -1,4 +1,4 @@
-package com.citest.tool.bean;
+package com.citest.tool.model;
 
 import java.io.Serializable;
 

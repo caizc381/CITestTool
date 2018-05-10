@@ -3,18 +3,17 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>smart-web</artifactId>
+	<artifactId>citest-tool</artifactId>
 	<packaging>jar</packaging>
 
-	<name>smart-web</name>
-	<description>smart-web for mytijian-smart</description>
+	<name>citest-tool</name>
 
 	<parent>
 		<groupId>com.mytijian.smart</groupId>
 		<artifactId>mytijian-smart</artifactId>
 		<version>1.8</version>
 		<relativePath>..</relativePath>
-	</parent>
+	</parent>	
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -178,4 +177,5 @@
 			</plugin>
 		</plugins>
 	</build>
+	<description>CITest Tool for Spring boot</description>
 </project>

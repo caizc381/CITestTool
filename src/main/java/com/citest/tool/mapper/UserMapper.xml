@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mytijian.account.mapper.UserMapper">
-	<resultMap id="userMap" type="com.mytijian.account.model.User">
+<mapper namespace="com.citest.tool.mapper.UserMapper">
+	<resultMap id="userMap" type="com.citest.tool.model.User">
 		<id column="id" property="id"/>
-		<result column="account_id" property="accountId"/>
 		<result column="username" property="username"/>
 		<result column="password" property="password"/>
-		<result column="source" property="source"/>
-		<result column="system" property="system"/>
-		<result column="url" property="url"/>
+		<result column="password_salt" property="passwordSalt" />
 		<result column="create_time" property="createTime" />
 		<result column="update_time" property="updateTime" />
+		<result column="role_type" property="roleType" />
 	</resultMap>
 	
 	<sql id="columns">
 			id,
-			account_id,
 			username,
 			password,
-			source,
-			system,
-			url,
-			create_time,
-			update_time
+			password_salt
+			created_time,
+			updated_time,
+			role_type
 	</sql>
 	
-	<select id="getUserInfo" resultMap="UserResultMap">
+	<select id="getUserInfo" resultMap="userMap">
 		select <include refid="columns"/>
 		from tb_user 
 		where
-		   	username=#{username} and password=#{password}
+		   	username=#{arg0} 
 	</select>
 	
 	<select id="getList" parameterType="map" resultMap="userMap">
